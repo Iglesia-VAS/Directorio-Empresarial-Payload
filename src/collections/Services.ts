@@ -2,7 +2,7 @@ import { CollectionConfig, FieldHook } from 'payload/types';
 import { isAdmin } from '../access';
 import { fas, IconDefinition, IconName } from '@fortawesome/free-solid-svg-icons';
 import ServicesDescription from '../components/ServicesDescriptionComponent';
-import payload from 'payload';
+import React from 'react';
 
 const formatSlug: FieldHook = ({ data }) => {
 	// Remove leading and trailing whitespaces
@@ -106,6 +106,23 @@ const ServiceCollection: CollectionConfig = {
 			type: 'select',
 			options: iconOptions,
 			required: true,
+			admin: {
+				description: () => React.createElement(
+					'span',
+					null,
+					'Los íconos disponibles se pueden ver aquí: ',
+					React.createElement(
+						'a',
+						{
+							href: 'https://fontawesome.com/v6/search?ic=free-collection&s=solid',
+							target: '_blank',
+							rel: 'noopener noreferrer',
+						},
+						'Font Awesome'
+					),
+					'. Encuentra el ícono que mejor represente el servicio y selecciona su nombre en esta lista desplegable.'
+				),
+			},
 		},
 	],
 	hooks: {
